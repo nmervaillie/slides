@@ -1,0 +1,27 @@
+
+= Bibliographie
+
+== Bibliographie FR
+
+* [OpenClassrooms] link:https://openclassrooms.com/fr/courses/1561696-les-reseaux-de-zero["Les réseau de zéro"]
+* [Comment ça marche] link:https://www.commentcamarche.net/contents/539-tcp-ip[TCP/IP]
+* [Wikibooks] : link:https://fr.wikibooks.org/wiki/R%C3%A9seaux_TCP/IP/Adressage_IP_v4[Adressage IP v4]
+* [Developpez.com] : link:https://laissus.developpez.com/tutoriels/cours-introduction-tcp-ip/[Cours d'introduction à TCP/IP]
+
+== Bibliographie EN
+
+* Wikipedia EN : 
+** link:https://en.wikipedia.org/wiki/Internet_protocol_suite[]
+** link:https://en.wikipedia.org/wiki/Internet_Protocol[]
+** link:https://en.wikipedia.org/wiki/Address_Resolution_Protocol[]
+** link:https://en.wikipedia.org/wiki/Transmission_Control_Protocol[]
+* [xahlee.info] link:http://xahlee.info/linux/tcp_ip_tutorial.html[TCP/IP Tutorial]
+* [Electronic Design] link:https://www.electronicdesign.com/what-s-difference-between/what-s-difference-between-osi-seven-layer-network-model-and-tcpip[What’s The Difference Between The OSI Seven-Layer Network Model And TCP/IP]
+
+== Bibliographie "Pratique"
+
+* [Jeu Linux en ligne pour les commandes] link:http://luffah.xyz/bidules/Terminus/[Terminus] (Merci Guillaume!)
+* [RaspberryPi.org] link:https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md[Creating an access point]
+* [Linux Commandes (Fiche mémoire)] link:http://juliend.github.io/linux-cheatsheet/[]
+* [Reddit] link:https://www.reddit.com/user/JaceTheSaltSculptor[Linux Commande Overview]
+* La référence ABSOLUE en livre : link:https://books.google.be/books/about/Computer_Networks.html?id=Pd-z64SJRBAC&redir_esc=y[Computer Networks by Andrew S. Tanenbaum]

@@ -3,8 +3,8 @@
 set -eux
 
 ZIP_FILE=gh-pages.zip
-REPOSITORY_NAME=slides
-REPOSITORY_OWNER=jlevesy
+REPOSITORY_NAME=isl-reseau-2018
+REPOSITORY_OWNER=dduportal
 REPOSITORY_URL="https://github.com/${REPOSITORY_OWNER}/${REPOSITORY_NAME}/archive/${ZIP_FILE}"
 CURRENT_DIR="$(cd "$(dirname "${0}")" && pwd -P)"
 DOCS_DIR="${CURRENT_DIR}/../docs"
@@ -23,23 +23,13 @@ else
 fi
 
 # If a tag triggered the deploy, we deploy to a folder having the tag name
-# Same if it is a branch different of "gh-pages" or "master"
 # otherwise we are on master and we deploy into latest
 set +u
+DEPLOY_DIR="${DOCS_DIR}/${TRAVIS_TAG}"
 if [ -n "${TRAVIS_TAG}" ]; then
-    echo "== Using tag ${TRAVIS_TAG}"
-    DEPLOY_DIR="${DOCS_DIR}/${TRAVIS_TAG}"
     # Generate QRCode and overwrite the default one
     make chmod
     make qrcode
-elif [ -n "${TRAVIS_BRANCH}" ] && [ "${TRAVIS_BRANCH}" != "master" ]; then
-    echo "== Using branch ${TRAVIS_BRANCH}"
-    DEPLOY_DIR="${DOCS_DIR}/${TRAVIS_BRANCH}"
-    # Generate QRCode and overwrite the default one
-    make chmod
-    make qrcode
-else
-    DEPLOY_DIR="${DOCS_DIR}"
 fi
 set -u
 

@@ -1,16 +1,7 @@
 
-GH_USERNAME=jlevesy
-PROJECT_NAME=slides
-
-ifdef TRAVIS_TAG
-PRESENTATION_URL ?= https://$(GH_USERNAME).github.io/$(PROJECT_NAME)/$(TRAVIS_TAG)
-else
-	ifneq ($(TRAVIS_BRANCH), master)
-	PRESENTATION_URL ?= https://$(GH_USERNAME).github.io/$(PROJECT_NAME)/$(TRAVIS_BRANCH)
-	else
-	PRESENTATION_URL ?= https://$(GH_USERNAME).github.io/$(PROJECT_NAME)
-	endif
-endif
+# If no tag present, then the URL sends you to the root of the gh-page
+# aka. "https://dduportal.github.io/isl-reseau-2018/" with a trailing slash
+PRESENTATION_URL ?= https://dduportal.github.io/isl-reseau-2018/$(TRAVIS_TAG)
 export PRESENTATION_URL
 
 all: clean build verify
@@ -30,6 +21,7 @@ verify-links:
 		-v $(CURDIR)/dist:/dist \
 		18fgsa/html-proofer \
 			--check-html \
+			--http-status-ignore "999" \
 			--url-ignore "/localhost:/,/127.0.0.1:/,/$(PRESENTATION_URL)/" \
         	/dist/index.html
 

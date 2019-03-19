@@ -1,8 +1,8 @@
 {
-    "name": "slides",
+    "name": "isl-reseau-2018",
     "version": "1.0.0",
-    "description": "Slides",
-    "repository": "https://github.com/jlevesy/slides",
+    "description": "Introduction au réseau, à la CLI Linux et à Git.",
+    "repository": "https://github.com/dduportal/isl-reseau-2018",
     "dependencies": {
         "highlightjs": "^9.10.0",
         "reveal.js": "3.7.0",

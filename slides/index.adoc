@@ -1,0 +1,61 @@
+[%notitle]
+= Introduction au Réseau - Institut Saint Laurent - 2018
+include::./includes/attributes.adoc[]
+
+[{invert}]
+== Introduction au Réseau
+[.title]
+Institut Saint Laurent - 2018
+
+image::qrcode.svg["QRCode to this presentation",height=150]
+
+[.small]
+Présentation disponible à l'URL link:{presentationUrl}[]
+
+== Comment utiliser cette présentation ?
+
+* Pour naviguer, utilisez les flèches en bas à droite (ou celles de votre clavier)
+** Gauche/Droite: changer de chapitre
+** Haut/Bas: naviguer dans un chapitre
+* Pour avoir une vue globale : utiliser la touche "kbd:[o]" (pour "*Overview*")
+* Pour voir les notes de l'auteur : utilisez la touche "kbd:[s]" (pour "*Speaker* notes")
+
+// //// Speaker Slide and Company slide
+[{invert}]
+== Whoami
+
+* Damien DUPORTAL:
+** link:https://traefik.io/[Træfik]'s Developer Advocate @
+link:https://containo.us/[Containous] et Freelancer
+** Former Training Engineer @ CloudBees
+
+* mailto:damien.duportal@gmail.com[icon:envelope[]damien.duportal@gmail.com]
+* link:https://twitter.com/DamienDuportal[icon:twitter[] @DamienDuportal]
+* link:https://github.com/dduportal[icon:github[] dduportal]
+
+image::damien.jpg[height=200]
+
+// //// end of Speaker Slide and Company slide
+
+
+// ///////////////////////
+// Include chapter here with a blank line between each
+// Notice the offset to have chapters as autonomous documents
+// ///////////////////////
+:leveloffset: +1
+
+include::./includes/intro-binaire.adoc[]
+include::./includes/intro-linux-cli.adoc[]
+include::./includes/intro-reseau.adoc[]
+include::./includes/couches-modele-osi.adoc[]
+include::./includes/couches-modele-internet-protocol.adoc[]
+include::./includes/couche-liaison-donnees.adoc[]
+include::./includes/couche-reseau.adoc[]
+include::./includes/couche-transport.adoc[]
+include::./includes/couche-application.adoc[]
+include::./includes/exercices-vm.adoc[]
+include::./includes/biblio.adoc[]
+
+:leveloffset: -1
+
+== Merci

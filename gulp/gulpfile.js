@@ -21,13 +21,13 @@ var tasks_dir_path = './tasks',
         sass: require('gulp-sass'),
     },
     current_config = {
-        docinfosPath: '/app/content/docinfos',
-        imgSrcPath: '/app/content/images',
+        docinfosPath: '/app/slides/docinfos',
+        imgSrcPath: '/app/slides/images',
         stylesSrcPath: '/app/assets/styles',
         fontSrcPath: '/app/assets/fonts',
-        faviconPath: '/app/content/images/favicon.ico',
+        faviconPath: '/app/slides/images/favicon.ico',
         distDir: '/app/dist',
-        sourcesDir: '/app/content',
+        sourcesDir: '/app/slides',
         nodeModulesDir: '/app/node_modules',
         listen_ip: process.env.LISTEN_IP || '0.0.0.0',
         listen_port: process.env.LISTEN_PORT || 8000,
@@ -52,5 +52,7 @@ gulp.task('build', gulp.series(
     ),
     'html'
 ));
+
+gulp.task('pdf', gulp.series('build', 'pdf-generate'));
 
 gulp.task('default', gulp.series('clean', 'build', 'serve', 'watch'));

@@ -1,0 +1,847 @@
+
+= Couche "Réseau"
+
+Modèle "Internet Protocol"
+
+[{invert}]
+== Où sommes nous ?
+
+image::tcp-ip-modele-internet-protocol.png[]
+
+== Buts de la couche "Réseau"
+
+Interconnexion des réseaux:
+
+* Gestion des adresses
+* Gestion du routage
+
+== Adresse IP
+
+* "IP" désigne aussi bien l'adresse que le protocole de communication :
+** "I.P." == "Internet Protocol"
+** Adresse logique (virtuelle)
+
+* 2 normes IPs:
+** Version 4 : IPv4 (défaut dans ce cours)
+** Version 6 : IPv6 (raison: épuisement du stock d'adresse IPv4... en théorie)
+
+== Adresse IPv4 : Format
+
+* Taille de 32 bits (4 octets)
+* Exprimé avec 4 nombres décimaux séparés par des points `.`. Exemples:
+** 0.0.0.0
+** 10.0.3.4
+** 192.168.0.1
+** 255.255.255.255
+
+== Adresse IPv6 : Format
+
+* Taille de 128 bits
+* Exprimé en suite de nombre hexa-décimaux, séparés par des double point `: `
+** Exemple : 001:0db8:0000:85a3:0000:0000:ac1f:8001
+
+== Adresse IP : Codage
+
+L'adresse IP porte 2 informations:
+
+* L'adresse de l'hôte
+* L'adresse du réseau
+
+== Adresse du réseau ?
+
+Wait, what ?
+
+3 adresses (MAC, IP, Réseau) ?
+
+== Rappel : Couches = Abstraction
+
+* Les modèles en couches (OSI, TCP/IP) définissent des *abstractions*
+
+* On a une couche physique, toutes les autres sont "logiques":
+** La couche réseau est donc "virtuelle"
+
+* L'adresse MAC est une adresse "physique"
+
+=> Plus que 2 adresses !
+
+[{invert}]
+== Pourquoi des "réseaux" ?
+
+image::reseau-interco.png[]
+
+== Adresses du Réseau: Abstraction
+
+Simplifions (Rappel: link:#descartes[Descartes])
+
+image::reseau-interco-simple.png[]
+
+== Définition d'un "Réseau"
+
+* Groupement logique d'hôtes
+* Abstraction des hôtes pour le monde extérieur
+
+== Réseau Locaux / Globaux
+
+* Réseau "local" ("LAN - Local Area Network") :
+** On parle d'un "segment"
+
+* Réseau "global" ("WAN - Wide Area Network) :
+** Interconnexion de segments
+
+== 2 adresses en 1
+
+* Q: Certes, mais comment l'adresse IP peut-elle embarquer 2 adresses en 1 ?
+* R: Avec ce qu'on appelle le "masque sous-réseau"
+
+[{invert}]
+== Qui se souvient ?
+
+image::lunettes-3d.jpg[]
+
+C'est pareil pour le masque sous réseau
+
+== Masque Sous-Réseau
+
+Concept:
+
+* On applique un "masque" sur l'adresse IP
+** Le résultat est l'adresse du réseau
+
+* Au lieu du bleu/rouge, on utilise le binaire
+
+* Si on n'a pas le même nombre de bits, alors on ajoute des 0
+** On doit donc avoir le même format que l'adresse IP
+
+== Opération "ET logique"
+
+* Utilisation de l'opération "ET logique"
+** Ressemble à la multiplication:
+*** 0 ET 0 = 0
+*** 1 ET 0 = 0
+*** 0 ET 1 = 0
+*** 1 ET 1 = 1
+
+== Calcul du masque sous-réseau
+
+* On aligne les bits entre l'IP et le masque
+* On effectue les opérations de "ET logique" bit à bit
+* On récupère le résultat
++
+[source]
+----
+11000000.10101000.00001010.00010100 => 192.168.10.20
+ET
+11111111.11111111.11111111.00000000 => 255.255.255.0
+=
+11000000.10101000.00001010.00000000 => 192.168.10.0
+----
+
+== Exercices masque sous-réseau
+
+* Quel est le réseau de l'adresse IP `192.168.1.2` (masque: `255.255.0.0`) ?
+* Quel est le réseau de l'adresse IP `10.128.4.10` (masque: `255.255.240.0`) ?
+* Quel est le réseau de l'adresse IP `172.195.4.1` (masque: `255.240.0.0`) ?
+
+[NOTE.speaker]
+--
+Solutions:
+
+```
+11000000.10101000.00000001.00000010 // 192.168.1.2
+ET
+11111111.11111111.00000000.00000000 // 255.255.0.0
+=
+11000000.10101000.00000000.00000000 // 192.168.0.0
+```
+
+```
+00001010.10000000.00000100.00001010 // 10.128.4.10
+ET
+11111111.11111111.11110000.00000000 // 255.255.240.0
+=
+00001010.10000000.00000000.00000000 // 10.128.0.0
+```
+
+```
+10101100.11000011.00000100.00000001 // 172.195.4.1
+ET
+11111111.11110000.00000000.00000000 // 255.240.0.0
+=
+10101100.11000000.00000000.00000000 // 172.192.0.0
+```
+--
+
+== Restriction des bits du masque
+
+* Est-ce qu'il y a des bandes rouges dans le verre bleu des lunettes ?
+
+* Un masque sous-réseau est toujours séparé en deux parties :
+** Une série de 1 contigus
+** Puis une série de 0 contigus
+
+== Exercice de reconnaissance de masques
+
+Quelles sont les masques sous réseau valides ?
+
+* 255.255.128.0
+* 255.255.255.192
+* 192.192.0.0
+* 192.192.0.0
+* 255.248.0.0
+* 255.255.255.252
+* 0.0.0.0
+
+== Obsolète: Classes d'adresses IP
+
+|===
+|Classe |Bits de départ |Début |Fin
+
+|Classe A
+|0
+|0.0.0.0
+|127.255.255.2553
+
+|Classe B
+|10
+|128.0.0.0
+|191.255.255.255
+
+|Classe C
+|110
+|192.0.0.0
+|223.255.255.255
+|===
+
+(Les classes D et E existaient également pour des adresses réservées)
+
+== Adresse IPv4 "Spéciales" 1/2
+
+|===
+|Bloc |Usage
+
+|0.0.0.0/8
+|Ce réseau
+
+|127.0.0.0/8
+|adresse de bouclage (localhost)
+
+|10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
+|Adresses privées
+
+|...
+|...
+
+|===
+
+== Adresse IPv4 "Spéciales" 2/2
+
+|===
+|Bloc |Usage
+
+|169.254.0.0/16
+|adresses locales autoconfigurées
+
+|255.255.255.255/32
+|broadcast limité
+
+|100.64.0.0/10
+|Espace partagé pour Carrier Grade NAT
+
+|224.0.0.0/4
+|Multicast "Multidiffusion"
+
+|...
+|...
+
+|===
+
+== Notation CIDR
+
+* Depuis 1994, on utilise la notation "CIDR" au lieu des classes d'IP
+** Beaucoup plus modulaire et adaptable
+
+* On ajoute un suffixe à l'adresse IP
+** Séparateur: caractètre slash `/`
+** Valeur du suffixe : nombre décimal indiquant le nombre de "1" du masque
+
+== Exemple de notation CIDR
+
+* `255.255.0.0` = `11111111.11111111.00000000.00000000`
+* => 16 zéros
+* L'adresse IP `192.168.2.1` associée au masque `255.255.0.0` est donc écrite `192.168.2.1/16`
+* On écrit également son réseau ainsi = `192.168.0.0/16`
+
+== Exercices CIDR
+
+* Donnez la notation CIDR de l'adresse IP `10.172.0.5` avec le masque `255.255.255.0`
+* Donnez la notation CIDR du réseau de l'adresse IP `192.168.2.1` avec le masque `255.240.0.0`
+* Quel est la masque correspondant à l'adresse IP `172.10.16.192/16` ?
+
+[NOTE.speaker]
+--
+
+* `10.172.0.5/24`
+* `192.160.0.0/12`
+* `255.255.252.0`
+
+--
+
+[{invert}]
+== Après les adresses, le "Routage"
+
+Comment envoyer un message d'une adresse à une autre ?
+
+image::routage-reseaux.png[height=500]
+
+[.small]
+https://openclassrooms.com/fr/courses/1561696-les-reseaux-de-zero[Source]
+
+== Routage
+
+Mécanisme de détermination du chemin pour la distribution du message
+
+image::routage.png[height=500]
+
+== Topologies de Routage
+
+* Unicast
+* Broadcast
+* Anycast
+* Multicast
+
+== Routage Unicast
+
+* Depuis 1 hôte vers 1 autre hôte: "Point à point"
+
+image::unicast.png[height=500]
+
+== Routage Broadcast
+
+* Depuis 1 hôte vers tous les hôtes du réseau local
+
+image::broadcast.png[height=500]
+
+== Routage Anycast
+
+* Depuis 1 hôte vers les hôtes les plus "proches" en multi-chemin
+
+image::anycast.png[height=500]
+
+[NOTE.speaker]
+--
+Exemple: Routage BGP
+--
+
+== Routage Multicast
+
+* Depuis 1 hôte vers les hôtes "abonnés"
+
+image::multicast.png[height=500]
+
+[NOTE.speaker]
+--
+Exemple: diffusion streaming
+--
+
+== Routage Local
+
+* Je suis `192.168.2.4`
+** Je veux envoyer un message à `192.168.2.7` (unicast)
+** Mon réseau est `192.168.2.0/24`
+
+* Nous sommes dans le même réseau (à vérifier pour le sport)
+** Le switch connaîtra l'adresse MAC: communication facile
+
+== Mais... et l'abstraction ?
+
+* On la respecte !
+
+* Mais il faut bien donner un destinataire à la couche "Liaison de Données".
+
+* En l'occurence: une adresse MAC.
+
+[{invert}]
+== Rappel : Transmission de données en TCP/IP
+
+image::tcp-ip-layer-transmit-data.jpg[height=500]
+
+== ARP
+
+* A.R.P. = "Address Resolution Protocol"
+* Lien entre les couches 2 (Liaison) et 3 (IP)
+* Protocole "question / réponse":
+** On demande une adresse IP
+** On obtient une (ou plusieurs) adresses MAC
+** On peut "forger" les messages !
+
+[{invert}]
+== Requête ARP
+
+image::arp.png[height=500]
+
+== Table ARP
+
+* On peut donc "conserver" ces paires d'adresses IP/MAC
+** But : meilleure performances de communication
+** "Mise en cache" : notion de durée de vie
+
+* Une table ARP par hôte du réseau *local*
+
+== Ping
+
+* "Ping" est une question, qui attends une réponse "Pong"
+* Commande permettant de tester l'accessibilité d'une machine via la couche "réseau"
+* Utilises le protocole "ICMP" (Internet Control Message Protocol)
+** Encapsulation dans le protocol IP
+
+== Exercices avec `ping`
+
+[NOTE.speaker]
+--
+* Vérifier la présence de la commande `ping`
+** `which ping` sous Linux
+** `where ping` sous Windows
+
+* `ping 127.0.0.1` puis `CTRL-C` pour s'arrêter
+* `ping -c3 127.0.0.1`
+* `ping -c3 192.168.2.1`
+* `ping -c3 192.168.2.x` (soi même)
+* `ping -c3 192.168.2.y` (Voisin)
+* `ping -c3 Google`
+--
+
+== Exercices avec ARP
+
+// // https://www.tecmint.com/linux-network-configuration-and-troubleshooting-commands/
+
+[source,bash]
+----
+$ sudo su - # Devenir root
+root$ arp -a # Afficher la table ARP (Linux et Windows)
+root$ arp -d <IP> # Supprimer l'entrée correspondant à <IP>
+root$ arp -a
+root$ ping -c3 <IP voisin>
+root$ arp -a # Quelle différence ?
+----
+
+== Routage "Global"
+
+* Je suis `192.168.2.4`
+** Je veux envoyer un message à `72.54.67.128` (unicast)
+** Mon réseau est `192.168.2.0/24`
+
+* Nous sommes dans des réseaux différents
+** Problème: comment faire ?
+
+== Passerelle
+
+* Adresse du réseau local
+** Concept logique
+
+* Destination des requêtes extra-réseau
+** "Porte de sortie" du réseau
+
+== Routeur
+
+* Hôte appartenant à 2 (ou plus) réseaux
+
+* C'est la machine qui fait "passerelle"
+
+* Il faut un retour aux requêtes émises:
+** Entrée / sortie d'un réseau
+
+== Exemple de réseaux avec un routeur
+
+image::router-interco-networks.png[height=600]
+
+== Et Caetera
+
+* Le routeur étant lui-même un noeud du réseau "parent"
+** Soit le destinataire est dans son réseau parent
+** Soit il transmet à la passerelle du réseau parent
+
+* Et Caetera...
+
+== Droit de réponse
+
+* On a pu faire l'aller. Mais quid de la requête retour?
+
+* Exemple de `ping` qui attend son `pong`...
+
+== Table de routage
+
+* Table stockée sur chaque hôte (routeur inclus)
+* Liste les passerelles **connues** sur lesquelles envoyer les requêtes
+** Ne contient QUE les réseaux de l'hôte
+* En fonction des adresses IP des destinataires
+* Contient toujours une route par défaut
+
+== Règles de remplissage de la table de routage
+
+* Remplir en 3 temps:
+** Une entrée par réseau d'appartenance
+** Une entrée par défaut
+** Une entrée "statique" par réseau à connaître
+
+* Les passerelles indiquées dans une table de routage
+appartiennent toujours à l'un des réseaux auxquels j'appartiens
+
+* Toujours une règle par défaut
+
+== Exemple de Table de routage
+
+Reprenons notre double réseau :
+
+image::router-interco-networks.png[height=600]
+
+== Table de Routage pour une machine
+
+Pour une machine "simple", c'est facile. Prenons `192.168.1.10` :
+
+|===
+|Réseau à joindre |Passerelle
+
+|192.168.1.0/24
+|192.168.1.10
+
+|0.0.0.0/0
+|192.168.1.1
+
+|===
+
+* Une entrée pour le réseau auquel on appartient
+* Une entrée par défaut
+
+== Rappel
+
+Reprenons notre double réseau :
+
+image::router-interco-networks.png[height=600]
+
+== Table de Routage pour le Routeur
+
+Pour le routeur, c'est presque aussi facile :
+
+|===
+|Réseau à joindre |Passerelle
+
+|192.168.1.0/24
+|192.168.1.1
+
+|10.0.2.0/16
+|10.0.2.1
+
+|0.0.0.0/0
+|127.0.0.1
+
+|===
+
+* Une entrée pour **chaque** réseau auquel on appartient
+* Une entrée par défaut
+** On suppose ici que le routeur est autonome
+
+[{invert}]
+== Exercice avec la table de routage 1/3
+
+image::reseaux-complexe-routage.png[height=550]
+
+[.small]
+https://openclassrooms.com/fr/courses/1561696-les-reseaux-de-zero[Source]
+
+== Exercice avec la table de routage 2/3
+
+* Quel est la table de routage de 192.168.0.1 ?
+
+[NOTE.speaker]
+--
+|===
+|Réseau à joindre |Passerelle
+
+|192.168.0.0/24
+|192.168.0.1
+
+|0.0.0.0/0
+|192.168.0.254
+
+|10.0.0.0/24
+|192.168.0.253
+
+|===
+--
+
+== Exercice avec la table de routage 3/3
+
+* Quel est la table de routage de "Routeur 1" ?
+
+[NOTE.speaker]
+--
+|===
+|Réseau à joindre |Passerelle
+
+|192.168.0.0/24
+|192.168.0.254
+
+|192.168.1.0/24
+|192.168.1.254
+
+|0.0.0.0/0
+|192.168.1.253
+
+|10.0.0.0/24
+|192.168.0.253
+
+|===
+--
+
+== Pratiquons avec la table de routage
+
+```
+sudo su - # Become root
+netstat -rn # Show Tables
+```
+
+== NAT
+
+* NAT = "Network Adress Translation"
+* 1 IP privée == 1 IP publique
+
+[{invert}]
+== NAT en image
+
+image::nat-static.jpg[height=500]
+
+== Exercices: "pont" Wifi
+
+* But: Etablir un pont Ethernet <-> Wifi
+** On a un réseau arrivant en Ethernet (accès en SSH aux pis)
+** On veut aussi brancher nos smartphones en Wifi
+** A raison d'un Wifi par Pi, sur le même réseau
+
+== Exercices: "pont" Wifi
+
+- Installer les paquets nécessaires (`hostapd bridge-utils`)
+- Arrêter les services utilisés
+
+[source,bash]
+----
+sudo su -
+apt-get update
+apt-get install hostapd bridge-utils
+systemctl stop hostapd
+----
+
+== Exercices: "pont" Wifi
+
+- Configurer manuellement les interfaces (`/etc/dhcpcd.conf`)
+
+[source,bash]
+----
+# Editeur de texte en ligne : nano
+nano /tmp/fichier.txt
+# Entrainez vous puis valider avec
+cat /tmp/fichier.txt
+
+# Maintenant, le vrai fichier
+cp /etc/dhcpcd.conf /etc/dhcpcd.conf.backup
+nano /etc/dhcpcd.conf
+# Ajouter "denyinterfaces wlan0" et "denyinterfaces eth0"
+cat /etc/dhcpcd.conf
+
+# En cas de problème:
+cp /etc/dhcpcd.conf.backup /etc/dhcpcd.conf
+----
+
+== Exercices: "pont" Wifi
+
+- Configurer le point d'accès wifi
+
+[source,bash]
+----
+echo 'DAEMON_CONF="/etc/hostapd/hostapd.conf"' >> /etc/default/hostapd
+cp /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.backup
+nano /etc/hostapd/hostapd.conf
+----
+
+[source,ini]
+----
+interface=wlan0
+bridge=br0
+ssid=ISL
+hw_mode=g
+channel=7
+wmm_enabled=0
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_passphrase=ISL2018!
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+----
+
+== Exercices: "pont" Wifi
+
+- Configurer le "pont" (aka. bridge)
+
+[source,bash]
+----
+brctl addbr br0 # Creation de l'interface réseau
+brctl addif br0 eth0 # Mixage des interfaces
+
+# Définition de la configuration de br0
+nano /etc/network/interfaces.d/br0
+----
+
+[source,ini]
+----
+auto br0
+iface br0 inet manual
+bridge_ports eth0 wlan0
+----
+
+== Exercices: "pont" Wifi
+
+- Tout réactiver :
+
+[source,bash]
+----
+systemctl enable hostapd
+reboot
+...
+systemctl status hostapd
+----
+
+- Tester tout ça
+
+
+== Exercises: Routeur Wifi
+
+* Comme pour le bridge, mais avec du routage dans un réseau privé
+
+* Il faut configurer un serveur DHCP: `dnsmasq`
+
+== Exercises: Routeur Wifi
+
+* Désactiver ce qu'on vient de faire:
+
+[source,bash]
+----
+systemctl disable hostapd
+rm -f /etc/hostapd/*.conf /etc/network/interfaces.d/br0
+reboot
+...
+systemctl status hostapd
+brctl delbr br0
+ip addr
+----
+
+== Exercises: Routeur Wifi
+
+* Configurer une IP statique publique :
+
+[source,bash]
+----
+# Décider du plan d'adressage et adapter ci-dessous
+nano /etc/dhcpcd.conf
+----
+
+[source,ini]
+----
+interface wlan0
+    static ip_address=192.168.4.1/24
+    nohook wpa_supplicant
+----
+
+== Exercises: Routeur Wifi
+
+* Installer dnsmasq avec `apt-get`
+
+* Configurer `dnsmasq` :
+
+[source,bash]
+----
+systemctl stop dnsmasq
+cp /etc/dnsmasq.conf /etc/dnsmasq.conf.backup
+nano /etc/dnsmasq.conf
+----
+
+[source,ini]
+----
+interface=wlan0      # Use the require wireless interface - usually wlan0
+  dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h
+----
+
+== Exercises: Routeur Wifi
+
+* Configurer hostapd comme précédemment (sauf la ligne "bridge"):
+
+[source,bash]
+----
+systemctl disable hostapd
+nano /etc/hostapd/hostapd.conf
+----
+
+[source,ini]
+----
+interface=wlan0
+driver=nl80211
+ssid=ISL
+hw_mode=g
+channel=7
+wmm_enabled=0
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_passphrase=ISL2019?
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+----
+
+== Exercises: Routeur Wifi
+
+* Vérifier les changements
+
+[source,bash]
+----
+systemctl restart dhcpcd
+systemctl start hostapd
+systemctl enable hostapd
+systemctl start dnsmasq
+systemctl enable dnsmasq
+----
+
+== Exercises: Routeur Wifi
+
+* Il manque le routage !
+
+[source,bash]
+----
+echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf
+sysctl -p
+
+# Masquerade
+iptables -t nat -A  POSTROUTING -o eth0 -j MASQUERADE
+sh -c "iptables-save > /etc/iptables.ipv4.nat"
+
+nano /etc/rc.local
+----
+
+[source,bash]
+----
+...
+iptables-restore < /etc/iptables.ipv4.nat
+
+exit 0
+
+----
+
+// == Exercises: chaîne de routage
+
+// == Exercice avec nmap
+
+// ```
+// nmap -sN 192.168.2.0/16 # Découverte des IPs sur le réseau
+// ```
