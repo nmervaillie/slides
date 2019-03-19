@@ -14,9 +14,7 @@ build: clean
 		--exit-code-from build \
 	build
 
-verify: verify-links verify-w3c
-
-verify-links:
+verify:
 	@docker run --rm \
 		-v $(CURDIR)/dist:/dist \
 		18fgsa/html-proofer \
@@ -49,4 +47,4 @@ chmod:
 	@docker run --rm -t -v $(CURDIR):/app \
 		alpine chown -R "$$(id -u):$$(id -g)" /app
 
-.PHONY: all build verify verify-links verify-w3c serve deploy qrcode chmod
+.PHONY: all build verify serve deploy qrcode chmod
