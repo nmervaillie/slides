@@ -22,7 +22,9 @@ module.exports = function (gulp, plugins, current_config) {
             notesHtml = gulp.src(baseRevealJSPath + '/plugin/notes/notes.html')
                 .pipe(gulp.dest(revealJsDestDir + '/plugin/notes/')),
             zoomJs = gulp.src(baseRevealJSPath + '/plugin/zoom-js/zoom.js')
-                .pipe(gulp.dest(revealJsDestDir + '/plugin/zoom-js/'));
+                .pipe(gulp.dest(revealJsDestDir + '/plugin/zoom-js/')),
+            themes = gulp.src(baseRevealJSPath + '/css/theme/*.css')
+                .pipe(gulp.dest(revealJsDestDir + '/css/theme/'));
 
         return plugins.mergeStreams(
             mainRevealCss,
@@ -33,7 +35,8 @@ module.exports = function (gulp, plugins, current_config) {
             notesJs,
             notesHtml,
             zoomJs,
-            markedJs
+            markedJs,
+            themes
         );
     });
 

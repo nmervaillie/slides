@@ -1,0 +1,83 @@
+[%notitle]
+= Kubernetes the "ARM" way - 
+include::./attributes.adoc[]
+
+[{invert}]
+== Kubernetes the "ARM" way
+[.title]
+DevOpsPro 2019 Vilnius
+
+// image::qrcode.png["QRCode to this presentation",height=150]
+
+== Whoami
+
+* Damien DUPORTAL:
+** link:https://traefik.io/[Træfik,window=_blank]'s Developer Advocate @
+link:https://containo.us/[Containous,window=_blank] & Freelancer
+* link:https://twitter.com/DamienDuportal[icon:twitter[] @DamienDuportal,window=_blank]
+* link:https://github.com/dduportal[icon:github[] dduportal,window=_blank]
+
+image::damien.jpg[height=200]
+
+[{invert}]
+== How to use these slides?
+
+* *Browse the slides:* Use the arrows
+** Change chapter: Left/Right arrows
+** Next or previous slide: Top and bottom arrows
+
+* *Overview of the slides:* keyboard's shortcut "kbd:[o]"
+
+* *Speaker mode (and notes):* keyboard's shortcut "kbd:[s]"
+
+// ///////////////////////
+// Include chapter here with a blank line between each
+// Notice the offset to have chapters as autonomous documents
+// ///////////////////////
+:leveloffset: +1
+
+== Say Hello to Raspberry Pi
+
+* 1 Gb, 4 cores ARM, SD Card for I/O, Wifi, Ethernet, Bluetooth, USB, HDMI, 30 $
+* Linux
+* Docker
+
+== Why would you use this?
+
+(instead of a low cost and disposable cloud machine)?
+
+* Is it only CDD ("Conference Driven Developement") with hype and fun?
+* Not only: 
+** you can **view** (make the system real, touchable, affordable and repeatable) and **break safely** things (sandbox, safety for learning curve)
+** maps reality of IT platform without the organisation bias: you are responsible of ALL layers (cost, hardware, system and softwae) and all processes.
+** 
+
+[.NOTE]
+--
+* **view**: make the system real, touchable, affordable and repeatable
+* **break** : sandbox, safety for learning curve
+--
+
+== Why Would you run Docker?
+
+* Because you can, it's up to the challenge
+* Use the right tool for the right job as Docker is a way to package your application
+** As much portable as possible: you only have to "tackle" the core problem and forget the rest
+* What are the core problem with Pis?
+** "Cross Compiling" problem
+** Performances
+
+== Why Would you an Orchestrator?
+
+* As soon as you need 2 Pis or more, than you want to orchestrate
+* Reproduce some kind of situations with Scheduling under high load
+
+
+== Why would you run your product?
+
+* Slowiness
+
+
+== Kubernetes on ARM
+
+:leveloffset: -1

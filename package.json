@@ -1,8 +1,8 @@
 {
-    "name": "isl-reseau-2018",
+    "name": "slides",
     "version": "1.0.0",
-    "description": "Introduction au réseau, à la CLI Linux et à Git.",
-    "repository": "https://github.com/dduportal/isl-reseau-2018",
+    "description": "Damien DUPORTAL 's presentation",
+    "repository": "https://github.com/dduportal/slides",
     "dependencies": {
         "highlightjs": "^9.10.0",
         "reveal.js": "3.7.0",

@@ -1,7 +1,16 @@
 
-# If no tag present, then the URL sends you to the root of the gh-page
-# aka. "https://dduportal.github.io/isl-reseau-2018/" with a trailing slash
-PRESENTATION_URL ?= https://dduportal.github.io/isl-reseau-2018/$(TRAVIS_TAG)
+GH_USERNAME ?= dduportal
+GH_PROJECT_NAME ?= slides
+
+ifdef TRAVIS_TAG
+PRESENTATION_URL ?= https://$(GH_USERNAME).github.io/$(GH_PROJECT_NAME)/$(TRAVIS_TAG)
+else
+	ifneq ($(TRAVIS_BRANCH), master)
+	PRESENTATION_URL ?= https://$(GH_USERNAME).github.io/$(GH_PROJECT_NAME)/$(TRAVIS_BRANCH)
+	else
+	PRESENTATION_URL ?= https://$(GH_USERNAME).github.io/$(GH_PROJECT_NAME)
+	endif
+endif
 export PRESENTATION_URL
 
 all: clean build verify
@@ -19,12 +28,9 @@ verify:
 		-v $(CURDIR)/dist:/dist \
 		18fgsa/html-proofer \
 			--check-html \
-			--http-status-ignore "999" \
 			--url-ignore "/localhost:/,/127.0.0.1:/,/$(PRESENTATION_URL)/" \
+			--http-status-ignore "999" \
         	/dist/index.html
-
-verify-w3c:
-	docker run --rm -v $(CURDIR)/dist:/app stratdat/html5validator
 
 serve: clean
 	@docker-compose up --build --force-recreate serve
@@ -34,7 +40,7 @@ shell:
 	@docker-compose exec serve sh
 
 deploy:
-	@bash $(CURDIR)/scripts/travis-gh-deploy.sh
+	bash $(CURDIR)/scripts/travis-gh-deploy.sh $(GH_PROJECT_NAME) $(GH_USERNAME)
 
 clean: chmod
 	@docker-compose down -v --remove-orphans
