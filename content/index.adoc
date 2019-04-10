@@ -1,16 +1,16 @@
 [%notitle]
-= Introduction au Réseau - Institut Saint Laurent - 2018
-include::./includes/attributes.adoc[]
+= Tests de bout en bout en shell avec “bats”, pour CLI, containers et clusters
+include::./attributes.adoc[]
 
 [{invert}]
-== Introduction au Réseau
-[.title]
-Institut Saint Laurent - 2018
+== Tests de bout en bout en shell avec “bats”
 
-image::qrcode.svg["QRCode to this presentation",height=150]
+pour CLI, containers et clusters
+
+image::gdg-lille.png["GDG Lille",height=300]
 
 [.small]
-Présentation disponible à l'URL link:{presentationUrl}[]
+Présentation disponible à l’URL: {presentationUrl}[{presentationUrl}]
 
 == Comment utiliser cette présentation ?
 
@@ -25,16 +25,14 @@ Présentation disponible à l'URL link:{presentationUrl}[]
 == Whoami
 
 * Damien DUPORTAL:
-** link:https://traefik.io/[Træfik]'s Developer Advocate @
-link:https://containo.us/[Containous] et Freelancer
+** link:https://traefik.io/[Træfik,window=_blank]'s Developer 🥑 Advocate @
+link:https://containo.us/[Containous,window=_blank] and Freelancer
 ** Former Training Engineer @ CloudBees
 
-* mailto:damien.duportal@gmail.com[icon:envelope[]damien.duportal@gmail.com]
-* link:https://twitter.com/DamienDuportal[icon:twitter[] @DamienDuportal]
-* link:https://github.com/dduportal[icon:github[] dduportal]
+* link:https://twitter.com/DamienDuportal[icon:twitter[] @DamienDuportal,window=_blank]
+* link:https://github.com/dduportal[icon:github[] dduportal,window=_blank]
 
 image::damien.jpg[height=200]
-
 // //// end of Speaker Slide and Company slide
 
 
@@ -44,18 +42,16 @@ image::damien.jpg[height=200]
 // ///////////////////////
 :leveloffset: +1
 
-include::./includes/intro-binaire.adoc[]
-include::./includes/intro-linux-cli.adoc[]
-include::./includes/intro-reseau.adoc[]
-include::./includes/couches-modele-osi.adoc[]
-include::./includes/couches-modele-internet-protocol.adoc[]
-include::./includes/couche-liaison-donnees.adoc[]
-include::./includes/couche-reseau.adoc[]
-include::./includes/couche-transport.adoc[]
-include::./includes/couche-application.adoc[]
-include::./includes/exercices-vm.adoc[]
-include::./includes/biblio.adoc[]
-
 :leveloffset: -1
 
-== Merci
+[{invert}]
+== Merci !
+
+link:https://twitter.com/DamienDuportal[icon:twitter[] @DamienDuportal]
+
+link:https://github.com/dduportal[icon:github[] dduportal]
+
+image::qrcode.png["QRCode to this presentation",height=150]
+
+[.small]
+{presentationUrl}[{presentationUrl}]
