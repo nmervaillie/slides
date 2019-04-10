@@ -15,7 +15,7 @@ if curl -sSLI --fail "${REPOSITORY_URL}"
 then
     curl -sSLO "${REPOSITORY_URL}"
     unzip -o "./${ZIP_FILE}"
-    mv ./${REPOSITORY_NAME}-${ZIP_FILE%%.*} "${DOCS_DIR}" # No ".zip" at the end
+    mv ./"${REPOSITORY_NAME}-${ZIP_FILE%%.*}" "${DOCS_DIR}" # No ".zip" at the end
     rm -f "./${ZIP_FILE}"
 else
     echo "== No gh-pages found, I assume this is the first time."
