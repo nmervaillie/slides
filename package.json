@@ -1,26 +1,25 @@
 {
-    "name": "isl-reseau-2018",
+    "name": "slides",
     "version": "1.0.0",
-    "description": "Introduction au réseau, à la CLI Linux et à Git.",
-    "repository": "https://github.com/dduportal/isl-reseau-2018",
+    "description": "Containous Presentations",
+    "repository": "https://github.com/containous/slides",
     "dependencies": {
-        "highlightjs": "^9.10.0",
+        "highlightjs": "^9.12.0",
         "reveal.js": "3.7.0",
         "font-awesome": "^4.7.0"
     },
     "devDependencies": {
-        "asciidoctor-reveal.js": "1.1.3",
-        "browser-sync": "^2.24.6",
+        "asciidoctor-reveal.js": "2.0.0",
+        "browser-sync": "^2.26.3",
         "gulp": "4.0.0",
-        "gulp-autoprefixer": "5.0.0",
-        "gulp-compass": "2.1.0",
-        "gulp-concat-css": "3.1.0",
+        "gulp-autoprefixer": "6.0.0",
         "gulp-csso": "3.0.1",
         "gulp-exec": "3.0.2",
         "gulp-ignore": "2.0.2",
         "gulp-rename": "1.4.0",
-        "gulp-sass": "^4.0.1",
+        "gulp-sass": "^4.0.2",
         "merge-stream": "1.0.1",
-        "qrcode": "1.2.2"
+        "npm-check-updates": "3.1.7",
+        "qrcode": "1.3.3"
     }
 }

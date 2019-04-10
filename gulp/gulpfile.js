@@ -10,8 +10,6 @@ var tasks_dir_path = './tasks',
         asciidoctorRevealjs: require('asciidoctor-reveal.js'),
         autoprefixer: require('gulp-autoprefixer'),
         browserSync: require('browser-sync').create(),
-        compass: require('gulp-compass'),
-        concatCss: require('gulp-concat-css'),
         csso: require('gulp-csso'),
         exec: require('gulp-exec'),
         fs: require('fs'),
@@ -21,18 +19,19 @@ var tasks_dir_path = './tasks',
         sass: require('gulp-sass'),
     },
     current_config = {
-        docinfosPath: '/app/slides/docinfos',
-        imgSrcPath: '/app/slides/images',
+        docinfosPath: '/app/content/docinfos',
+        imgSrcPath: '/app/content/images',
         stylesSrcPath: '/app/assets/styles',
         fontSrcPath: '/app/assets/fonts',
-        faviconPath: '/app/slides/images/favicon.ico',
+        faviconPath: '/app/content/images/favicon.ico',
         distDir: '/app/dist',
-        sourcesDir: '/app/slides',
+        sourcesDir: '/app/content',
         nodeModulesDir: '/app/node_modules',
         listen_ip: process.env.LISTEN_IP || '0.0.0.0',
         listen_port: process.env.LISTEN_PORT || 8000,
         livereload_port: process.env.LIVERELOAD_PORT || 35729,
     };
+plugins.asciidoctorRevealjs.register();
 
 fs.readdirSync(tasks_dir_path).forEach(function (file) {
     'use strict';
@@ -52,7 +51,5 @@ gulp.task('build', gulp.series(
     ),
     'html'
 ));
-
-gulp.task('pdf', gulp.series('build', 'pdf-generate'));
 
 gulp.task('default', gulp.series('clean', 'build', 'serve', 'watch'));

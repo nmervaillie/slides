@@ -1,4 +1,4 @@
-/**
+git s/**
  * This theme is based upon the Solarized Light theme for reveal.js.
  * Author of current theme: Damien DUPORTAL
  * Author of Solarized: Achim Staebler
@@ -49,7 +49,8 @@
     color: rgb(55, 171, 200); }
 
 .reveal section[data-state="invert"] a {
-    color: #78b9e6; }
+  color: rgb(134, 0, 139);
+  }
 
 .reveal section[data-state="invert"] a:hover {
     color: rgba(33, 15, 78, 0.85); }
@@ -105,7 +106,7 @@ body {
   font-weight: normal;
   line-height: 1.2;
   letter-spacing: normal;
-  text-transform: uppercase;
+  text-transform: capitalize;
   text-shadow: none;
   word-wrap: break-word; }
 
@@ -300,6 +301,10 @@ body {
   background: rgba(255, 255, 255, 0.2);
   border-color: #268bd2;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
+
+.reveal span img {
+  vertical-align: text-bottom;
+}
 
 /*********************************************
  * NAVIGATION CONTROLS
