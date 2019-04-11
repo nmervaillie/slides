@@ -37,11 +37,11 @@ image::damien.jpg[height=200]
 
 == Menu
 
-* Tests de bout en bout: Kezako ?
-
 * Tester une CLI
 
 * Tester des containeurs
+
+* Tests de bout en bout: Kezako ?
 
 * Tester une application complexe
 
