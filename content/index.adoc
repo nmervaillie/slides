@@ -35,12 +35,29 @@ link:https://containo.us/[Containous,window=_blank] and Freelancer
 image::damien.jpg[height=200]
 // //// end of Speaker Slide and Company slide
 
+== Menu
 
-// ///////////////////////
-// Include chapter here with a blank line between each
-// Notice the offset to have chapters as autonomous documents
-// ///////////////////////
+* Tests de bout en bout: Kezako ?
+
+* Tester une CLI
+
+* Tester des containeurs
+
+* Tester une application complexe
+
 :leveloffset: +1
+
+// = Tests de bout en bout: Kezako ?
+include::./includes/bout-en-bout.adoc[]
+
+// = Tester une CLI
+include::./includes/tester-cli.adoc[]
+
+// = Tester des containeurs
+include::./includes/tester-containeurs.adoc[]
+
+// = Tester une application complexe
+include::./includes/tester-app.adoc[]
 
 :leveloffset: -1
 
