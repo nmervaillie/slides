@@ -3,7 +3,6 @@
 
 == Tests de bout en bout
 
-* "End to end" / "BroadStack"
 * Objet: tester des scénarios d'utilisation de l'application
 du point de vue de l'utilisateur final
 * Usages: BDD ("Behaviour Driven Development") et non régression
@@ -40,6 +39,7 @@ image::test-pyramid.png[]
 
 == Bibliographie
 
-* (EN) https://martinfowler.com/bliki/BroadStackTest.html
-* (EN) https://www.softwaretestinghelp.com/what-is-end-to-end-testing/
-* (FR) https://blog.testingdigital.com/quest-test-de-bout-bout-end-to-end-1288
+* (EN) https://martinfowler.com/bliki/BroadStackTest.html[]
+* (EN) https://www.softwaretestinghelp.com/what-is-end-to-end-testing/[]
+* (FR) https://blog.testingdigital.com/quest-test-de-bout-bout-end-to-end-1288[]
+* (FR) http://douche.name/blog/nomenclature-des-tests-logiciels/[]

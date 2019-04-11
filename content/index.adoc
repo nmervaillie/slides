@@ -47,14 +47,14 @@ image::damien.jpg[height=200]
 
 :leveloffset: +1
 
-// = Tests de bout en bout: Kezako ?
-include::./includes/bout-en-bout.adoc[]
-
 // = Tester une CLI
 include::./includes/tester-cli.adoc[]
 
 // = Tester des containeurs
 include::./includes/tester-containeurs.adoc[]
+
+// = Tests de bout en bout: Kezako ?
+include::./includes/bout-en-bout.adoc[]
 
 // = Tester une application complexe
 include::./includes/tester-app.adoc[]
