@@ -65,6 +65,16 @@ deploy: pdf
 	@bash $(CURDIR)/scripts/travis-gh-deploy.sh
 
 clean:
+ifdef TRAVIS_TAG
+	@echo "==TRAVIS_TAG: $(TRAVIS_TAG)"
+else
+ifdef TRAVIS_BRANCH
+ifneq ($(TRAVIS_BRANCH), master)
+	@echo "==TRAVIS_BRANCH: $(TRAVIS_BRANCH)"
+endif
+endif
+endif
+	@echo "==$(TRAVIS_BRANCH)"
 	@docker-compose down -v --remove-orphans
 	@rm -rf $(DIST_DIR)
 
