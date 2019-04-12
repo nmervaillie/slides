@@ -1,16 +1,21 @@
 CURRENT_UID = $(shell id -u):$(shell id -g)
 DIST_DIR ?= $(CURDIR)/dist
+REPOSITORY_NAME ?= slides
+REPOSITORY_OWNER ?= dduportal
+REPOSITORY_BASE_URL ?= https://github.com/$(REPOSITORY_OWNER)/$(REPOSITORY_NAME)
+
 ifdef TRAVIS_TAG
-PRESENTATION_URL ?= https://dduportal.github.io/slides/$(TRAVIS_TAG)
+REPOSITORY_URL ?= $(REPOSITORY_BASE_URL)/tree/$(TRAVIS_TAG)
+PRESENTATION_URL ?= https://$(REPOSITORY_OWNER).github.io/$(REPOSITORY_NAME)/$(TRAVIS_TAG)
 else
+	REPOSITORY_URL ?= $(REPOSITORY_BASE_URL)
+	PRESENTATION_URL ?= https://$(REPOSITORY_OWNER).github.io/$(REPOSITORY_NAME)
 	ifneq ($(TRAVIS_BRANCH), master)
-	PRESENTATION_URL ?= https://dduportal.github.io/slides/$(TRAVIS_BRANCH)
-	else
-	PRESENTATION_URL ?= https://dduportal.github.io/slides
+	REPOSITORY_URL ?= $(REPOSITORY_BASE_URL)/tree/$(TRAVIS_BRANCH)
+	PRESENTATION_URL ?= https://$(REPOSITORY_OWNER).github.io/$(REPOSITORY_NAME)/$(TRAVIS_BRANCH)
 	endif
 endif
-export PRESENTATION_URL CURRENT_UID
-
+export PRESENTATION_URL CURRENT_UID REPOSITORY_URL REPOSITORY_BASE_URL
 
 all: clean build verify
 
