@@ -73,7 +73,7 @@ ok 2 docker version is 18.09.3
 @test "ls sur un fichier non existant a une erreur 1" {
   run ls -l /nonexistent_filename
   [ "$status" -eq 1 ]
-  [ "$output" = "ls:/nonexistent_filename: No such file or directory
+  [ "$output" = "ls: /nonexistent_filename: No such file or directory" ]
 }
 ----
 
@@ -87,7 +87,7 @@ ok 2 docker version is 18.09.3
 # fichier "custom_helper.bash"
 
 say_hello() {
-    echo "Hello"
+  echo "Hello"
 }
 ----
 
@@ -97,7 +97,7 @@ say_hello() {
 load custom_helper
 
 @test "Dire bonjour" {
-    say_hello
+  say_hello
 }
 ----
 

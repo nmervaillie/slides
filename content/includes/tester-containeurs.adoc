@@ -95,7 +95,7 @@ run_command_with_docker() {
 loader docker_helper
 
 @test "With no cmd/args, the image return Bats version" {
-	run_command_with_docker | grep "Bats" | grep "${BATS_VERSION}"
+	run_command_with_docker "bats -v" | grep "Bats" | grep "${BATS_VERSION}"
 }
 ----
 
