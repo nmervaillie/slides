@@ -54,7 +54,7 @@ $ bats test-docker.bats
 
 * Bats permet d'exporter en format link:http://testanything.org/[TAP]
 ** Parsable par une machine
-** Vient du monde Perl, mais beaucoup de modules: (exemple: link:https://wiki.jenkins.io/display/JENKINS/TAP+Plugin[Jenkins TAP module])
+** Vient du monde Perl, mais beaucoup de modules
 
 [source,bash]
 ----
